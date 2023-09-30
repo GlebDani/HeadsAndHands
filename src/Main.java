@@ -12,37 +12,24 @@ public class Main {
         int numOfMonsters=-1;
         do{
             System.out.println("Enter the maximum health value:");
-            try{
-                Engine.maxHealthValue = scanner.nextInt();
-            }
-            catch(InputMismatchException e){
-                System.out.println("Try again");
-                scanner.nextLine();
-            }
+            Engine.maxHealthValue = Engine.correctInput();
+
         }while((Engine.maxHealthValue<0));
         do{
             System.out.println("How many monsters would you like to create?");
-            try{
-                numOfMonsters = scanner.nextInt();
-            }
-            catch(InputMismatchException e){
-                System.out.println("Try again");
-                scanner.nextLine();
-            }
-
+            numOfMonsters = Engine.correctInput();
         }while((numOfMonsters<0));
 
 
 
         Engine en = new Engine(numOfMonsters);
-        scanner.nextLine();
+
         String quit="";
         while (!quit.equalsIgnoreCase("Q")) {
-            System.out.println("If you would  like to attack anybody, type Y\nIf you would kile to heal yourself, type H\n" +
-                    "If you would like to quit, type Q");
+            System.out.println("Type a - to attack, type h- to heal yourself, type q - to quit.");
             quit = scanner.nextLine().toLowerCase();
             switch (quit) {
-                case "y" -> {
+                case "a" -> {
                     if (Engine.listOfMonsters.size() == 0)
                         System.out.println("There is no monsters left");
                     else
@@ -52,10 +39,6 @@ public class Main {
                 case "q" -> System.out.println("You are quiting");
                 default -> System.out.println("Choose something");
             }
-
-
-
-
         }
     }
 }

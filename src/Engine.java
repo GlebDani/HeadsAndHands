@@ -3,8 +3,10 @@ import java.util.*;
 public class Engine {
 
     Random random = new Random();
+    static Scanner scanner = new Scanner(System.in);
+
     static int maxHealthValue = -1;
-    static List<Creature> listOfMonsters = new ArrayList<>();
+    static List<Monster> listOfMonsters = new ArrayList<>();
     static Player player;
 
     Engine(int numOfMonsters){
@@ -22,7 +24,6 @@ public class Engine {
         }
         else
             System.out.println("Sorry, you are too weak to attack. Work out!");
-
     }
 
     public void Damage(Creature creature1,  Creature creature2, int attackModifier){
@@ -39,7 +40,16 @@ public class Engine {
                 break;
             }
         }
-
+    }
+    static public int correctInput( ){
+        int inp = -1;
+        try{
+            inp = scanner.nextInt();
+        }
+        catch(InputMismatchException e){
+            scanner.nextLine(); //prevent the appearance of endless while
+        }
+        return inp;
     }
 
 

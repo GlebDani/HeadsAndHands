@@ -1,10 +1,17 @@
 public class Monster extends Creature{
 
+    static int counter = 1;
+    final String name = Engine.scanner.nextLine();
+    Monster(){
+        counter++;
+    }
 
-    public void setName(){
+    public String setName(){
         System.out.println("Type the Monster's name");
-        String name = scanner.nextLine();
-        super.setName(name);
+//        Engine.scanner.nextLine(); // skip /n after nextInt
+        String name =  Engine.scanner.nextLine();
+        name = (name.isBlank())? "Monster"+counter: name;
+        return name;
 
     }
 }

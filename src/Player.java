@@ -1,5 +1,6 @@
 public class Player extends Creature{
 
+
     int numOfHeals = 4;
 
     public void Heal(){
@@ -12,11 +13,11 @@ public class Player extends Creature{
             System.out.println("Ops, you don't have any heals :(( ");
     }
 
-
-
-    public void setName() {
+    public String setName() {
         System.out.println("Type your Avatar's name");
-        String name = scanner.nextLine();
-        super.setName(name);
+//        Engine.scanner.nextLine(); // skip /n after nextInt
+        String name = Engine.scanner.nextLine();
+        name = (name.isBlank())? "Player": name;
+        return name;
     }
 }
