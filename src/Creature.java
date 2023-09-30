@@ -1,3 +1,5 @@
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class Creature {
 
@@ -7,8 +9,11 @@ public abstract class Creature {
     private String name;
     int[] damage = new int[2];
 
+    private Map<String, int[]> param = Map.of("attack",new int[]{0, 1, 30},  "defence", new int[]{0, 1, 30}, "health",  new int[]{0, 1, Engine.maxHealthValue},"lower damage bound",new int[]{0, 0, Integer.MAX_VALUE}, "upper damage bound",new int[]{0,0,Integer.MAX_VALUE});
+
     Creature(){
         this.name = setName();
+        setParam(param);
         setAttack();
         setDefence();
         setHealth();
@@ -51,38 +56,34 @@ public abstract class Creature {
     abstract public String setName();
 
     public void setAttack(){
-        do{
-            System.out.println("Choose "+name+"'s attack value:");
-            this.attack = Engine.correctInput();
-        }while(getAttack() <1 || getAttack()>30);
+        this.attack = param.get("attack")[0];
     }
     public void setDefence(){
-        do{
-            System.out.println("Choose "+name+"'s defence value:");
-            this.defence = Engine.correctInput();
-        }while(getDefence() <1 || getDefence()>30);
+        this.defence = param.get("defence")[0];
     }
     public void setHealth(){
-        do{
-            System.out.println("Choose "+name+"'s health value:");
-            this.health = Engine.correctInput();
-        }while(getHealth() <0 || getHealth()>Engine.maxHealthValue);
+        this.health = param.get("health")[0];
     }
     public void setDamage(){
-        do{
-            System.out.println("Choose "+name+"'s lower damage value:");
-            this.damage[0] = Engine.correctInput();
-
-        }while(getDamage()[0]<0 );
-        do{
-            System.out.println("Choose "+name+"'s upper damage value:");
-            this.damage[1] = Engine.correctInput();
-        }while(getDamage()[1]<=getDamage()[0]);
+        this.damage[0] = param.get("lower damage bound")[0];
+        this.damage[1] = param.get("upper damage bound")[0];
     }
 
+    public void setParam(Map<String, int[]> param){
+       Map.Entry.comparingByValue();
+//        Map.Entry.comparingByKey();
+        for(Map.Entry<String, int[]> e: param.entrySet()){
+            String key = e.getKey();
+            int [] values = e.getValue();
+            if (key.equals("upper damage bound")) values[1] = param.get("lower damage bound")[0];
 
+            do{
+                System.out.println("Choose "+name+"'s "+key+" value:");
+                values[0] = Engine.correctInput();
+            }while(values[0] <values[1] || values[0]>values[2]);
 
+        }
 
-
+    }
 
 }
