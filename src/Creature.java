@@ -9,7 +9,7 @@ public abstract class Creature {
     private String name;
     int[] damage = new int[2];
 
-    private Map<String, int[]> param = Map.of("attack",new int[]{0, 1, 30},  "defence", new int[]{0, 1, 30}, "health",  new int[]{0, 1, Engine.maxHealthValue},"lower damage bound",new int[]{0, 0, Integer.MAX_VALUE}, "upper damage bound",new int[]{0,0,Integer.MAX_VALUE});
+    private Map<String, int[]> param = Map.of("attack",new int[]{0, 1, 30},  "defence", new int[]{0, 1, 30}, "health",  new int[]{0, 1, Engine.maxHealthValue},"lower damage bound",new int[]{0, 1, Integer.MAX_VALUE}, "upper damage bound",new int[]{0,0,Integer.MAX_VALUE});
 
     Creature(){
         this.name = setName();
@@ -70,12 +70,11 @@ public abstract class Creature {
     }
 
     public void setParam(Map<String, int[]> param){
-       Map.Entry.comparingByValue();
-//        Map.Entry.comparingByKey();
+        param = new TreeMap<>(param);
         for(Map.Entry<String, int[]> e: param.entrySet()){
             String key = e.getKey();
             int [] values = e.getValue();
-            if (key.equals("upper damage bound")) values[1] = param.get("lower damage bound")[0];
+            if (key.equals("upper damage bound")) values[1] = param.get("lower damage bound")[0]+1;
 
             do{
                 System.out.println("Choose "+name+"'s "+key+" value:");
@@ -85,5 +84,6 @@ public abstract class Creature {
         }
 
     }
+
 
 }
