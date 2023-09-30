@@ -5,7 +5,7 @@ public class Engine {
     Random random = new Random();
     static Scanner scanner = new Scanner(System.in);
 
-    static int maxHealthValue = -1;
+    static int maxHealthValue;
     static List<Monster> listOfMonsters = new ArrayList<>();
     static Player player;
 

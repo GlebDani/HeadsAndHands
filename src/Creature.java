@@ -1,11 +1,10 @@
-import java.util.*;
 
 public abstract class Creature {
 
     private int attack;
     private double health;
     private int defence;
-    private String name ="";
+    private String name;
     int[] damage = new int[2];
 
     Creature(){
