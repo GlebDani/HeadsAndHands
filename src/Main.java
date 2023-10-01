@@ -1,11 +1,7 @@
-
-
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         System.out.println("Hi. Welcome to our battle royal game.\nYou have to create Magic Creatures: your avatar and your rivals, i.e Monsters.\n" +
                "All Creatures have Health, Defence, Attack and Damage value. First of all, set the maximum health value and the number of monsters." );
@@ -23,9 +19,10 @@ public class Main {
         Engine en = new Engine(numOfMonsters);
 
         String quit="";
+        Engine.scanner.nextLine(); // skip \n after nextInt
         while (!quit.equalsIgnoreCase("Q")) {
             System.out.println("Type a - to attack, type h- to heal yourself, type q - to quit.");
-            quit = scanner.nextLine().toLowerCase();
+            quit = Engine.scanner.nextLine().toLowerCase();
             switch (quit) {
                 case "a" -> {
                     if (Engine.listOfMonsters.size() == 0)

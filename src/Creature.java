@@ -1,10 +1,9 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public abstract class Creature {
 
     private int attack;
-    private double health;
+    private int health;
     private int defence;
     private String name;
     int[] damage = new int[2];
@@ -14,10 +13,6 @@ public abstract class Creature {
     Creature(){
         this.name = setName();
         setParam(param);
-        setAttack();
-        setDefence();
-        setHealth();
-        setDamage();
     }
 
     public int getAttack(){
@@ -36,11 +31,11 @@ public abstract class Creature {
         return name;
     }
 
-    public void changeHealth(double healthValue, boolean action){
-        if(action)
-            health = ( health + healthValue>Engine.maxHealthValue) ? Engine.maxHealthValue :health + healthValue;
+    public void changeHealth(int healthValue, boolean action){
+        if(action) // add health value
+            health = Math.min(health + healthValue, Engine.maxHealthValue);
 
-        else
+        else // remove health value
             health -= healthValue;
     }
 
@@ -55,19 +50,6 @@ public abstract class Creature {
 
     abstract public String setName();
 
-    public void setAttack(){
-        this.attack = param.get("attack")[0];
-    }
-    public void setDefence(){
-        this.defence = param.get("defence")[0];
-    }
-    public void setHealth(){
-        this.health = param.get("health")[0];
-    }
-    public void setDamage(){
-        this.damage[0] = param.get("lower damage bound")[0];
-        this.damage[1] = param.get("upper damage bound")[0];
-    }
 
     public void setParam(Map<String, int[]> param){
         param = new TreeMap<>(param);
@@ -82,6 +64,11 @@ public abstract class Creature {
             }while(values[0] <values[1] || values[0]>values[2]);
 
         }
+        attack = param.get("attack")[0];
+        defence = param.get("defence")[0];
+        health = param.get("health")[0];
+        damage[0] = param.get("lower damage bound")[0];
+        damage[1] = param.get("upper damage bound")[0];
 
     }
 

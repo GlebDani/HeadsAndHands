@@ -3,7 +3,7 @@ public class Player extends Creature{
 
     public void Heal(){
         if (numOfHeals > 0){
-            changeHealth( 0.3 * Engine.maxHealthValue, true);
+            changeHealth( (int) (0.3 * Engine.maxHealthValue), true);
             numOfHeals--;
             System.out.println(getHealth());
         }
@@ -15,7 +15,7 @@ public class Player extends Creature{
         System.out.println("Type your Avatar's name");
         Engine.scanner.nextLine(); // skip /n after nextInt
         String name = Engine.scanner.nextLine();
-        name = (name.isBlank())? "Player": name;
+        name = (name.isBlank())? "Player": name;//default name
         return name;
     }
 }
