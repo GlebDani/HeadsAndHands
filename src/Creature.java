@@ -59,7 +59,7 @@ public abstract class Creature {
             if (key.equals("upper damage bound")) values[1] = param.get("lower damage bound")[0]+1;
 
             do{
-                System.out.println("Choose "+name+"'s "+key+" value:");
+                System.out.println("Choose "+name+"'s "+key+" value within ["+values[1]+","+((values[2]==Integer.MAX_VALUE)?"N":values[2])+"]:");
                 values[0] = Engine.correctInput();
             }while(values[0] <values[1] || values[0]>values[2]);
 
